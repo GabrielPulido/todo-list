@@ -11,8 +11,54 @@
 
 <body>
     <script type="module" src="main.js"></script>
-
+    <div>
+        <h1 class="project-title" id="project-title-header">Default Project</h1>
+    </div>
     <div id="container">
+        <div id="sidebar">
+            <h1 id="sidebar-header">Projects: </h1>
+            <button id="add-project-btn">+</button>
+            <button class="projects">Demo Lab 4</button>
+            <button class="projects">Study for Midterm</button>
+            <button class="projects">Finish Web Development Course</button>
+            <button class="projects">Start Learning Networking</button>
+        </div>
+        <div id="task-stuff">
+            <div id="add-task-div">
+                <button id="add-task-btn">Add Task +</button>
+            </div>
+            <div id="task-container">
+
+                <div class="task-box" id="DefaultProject-task1">
+                    <div class="task-content">
+                        <h2 class="task-header">Task 1: </h2>
+                        <h3>Description:</h3>
+                        <h3>Deadline:</h3>
+                        <h3>Priority:</h3>
+
+                        <label for="DefaultProject-task1-done" class="task-done">Done?</label>
+                        <input type="checkbox" name="DefaultProject-task1-done" id="DefaultProject-task1-done">
+
+                        <div class="subtask">
+                            <input type="checkbox" name="DefaultProject-task1-subtask1-done"
+                                id="DefaultProject-task1-subtask1-done">
+                            <label for="DefaultProject-task1-subtask1-done">This is my 1st subtask</label>
+                        </div>
+
+                        <div class="subtask">
+                            <input type="checkbox" name="DefaultProject-task1-subtask2-done"
+                                id="DefaultProject-task1-subtask2-done">
+                            <label for="DefaultProject-task1-subtask2-done">This is my 2nd subtask</label>
+                        </div>
+
+                        <button class="add-subtask-btn">Add Subtask +</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
 
     </div>
 </body>

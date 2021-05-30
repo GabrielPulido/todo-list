@@ -1,3 +1,88 @@
-.test {
-    color: red;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #3066BE;
+}
+
+input[type="checkbox"], label {
+    cursor: pointer;
+}
+
+button {
+background: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+}
+
+#sidebar {
+    flex-basis: 250px;
+    margin-right: 5px;
+}
+
+#project-title-header {
+    text-align: center;
+}
+
+#task-container {
+    display: grid;
+    background: rgb(59, 59, 59);
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+.task-box {
+    background: grey;
+    width: 350px;
+    border-radius: 10px;
+}
+
+#sidebar-header {
+    display: inline;
+    font-size: 1.5em;
+}
+
+.projects {
+    display: block;
+    margin-top: 10px;
+}
+
+.task-header {
+    display: inline;
+}
+
+.add-subtask-btn {
+    font-size: 1em;
+    margin-top: 10px;
+    display: block;
+}
+
+.task-content {
+    margin: 10px 10px 10px 10px;
+}
+
+#add-task-div {
+    text-align: center;
+}
+
+#add-task-btn {
+    margin-bottom: 10px;
+}
+
+.task-done {
+    font-weight: bolder;
+    font-size: 1.17em;
+    cursor: pointer;
+}
+
+.subtask {
+    margin: 10px 0px 10px 0px;
+    font-size: 1.1em;
 }

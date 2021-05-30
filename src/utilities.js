@@ -25,4 +25,9 @@ let objectSummary = (obj) => {
     return arr;
 }
 
-export { objectSummary };
+let removeSpace = (str) => {
+    let newStr = str.replaceAll(' ', '');
+    return newStr;
+}
+
+export { objectSummary, removeSpace };

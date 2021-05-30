@@ -45,3 +45,6 @@ let isSubtask = (x) => {
     }
     return true;
 }
+
+export default Subtask
+export { isSubtask }
