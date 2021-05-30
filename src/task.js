@@ -4,6 +4,8 @@ import { objectSummary } from "./utilities";
 */
 let Task = (name, description, deadline, priority, complete) => {
 
+    let subtasks = [];
+
     //Getters
     let getName = () => {
         return name;
