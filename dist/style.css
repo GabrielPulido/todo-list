@@ -60,20 +60,15 @@ background: none;
 
 .add-subtask-btn {
     font-size: 1em;
-    margin-top: 10px;
-    display: block;
 }
 
 .task-content {
     margin: 10px 10px 10px 10px;
 }
 
-#add-task-div {
-    text-align: center;
-}
-
-#add-task-btn {
+.add-task-div {
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .task-done {
@@ -85,4 +80,47 @@ background: none;
 .subtask {
     margin: 10px 0px 10px 0px;
     font-size: 1.1em;
+}
+
+.subtask-header {
+    display: inline;
+}
+
+.subtask-header-and-btn {
+    margin-top: 10px;
+}
+
+.delete-subtask-btn {
+    font-size: 1em;
+}
+
+.delete-subtask-div {
+    text-align: center;
+}
+
+.task-description {
+    word-wrap: break-word;
+}
+
+.task-deadline-h3, .task-deadline {
+    display: inline;
+}
+
+.task-priority-h3, .task-priority {
+    display: inline;
+}
+
+.delete-task-btn, .edit-task-btn {
+    font-size: 1.1em;
+    max-height: 40px;
+}
+
+.task-title-and-delete-task-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+#delete-project-div {
+    text-align: center;
+    margin-top: 10px;
 }
