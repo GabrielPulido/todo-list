@@ -30,4 +30,13 @@ let removeSpace = (str) => {
     return newStr;
 }
 
-export { objectSummary, removeSpace };
+//removes a specific item from an array and returns a new array without that item
+let removeArrayItem = (array, item) => {
+    let index = array.indexOf(item);
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+    return array;
+}
+
+export { objectSummary, removeSpace, removeArrayItem };
