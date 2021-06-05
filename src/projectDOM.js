@@ -1,8 +1,13 @@
 import { removeSpace } from "./utilities";
 import Project from "./projects";
-import { getTaskContainerID, getProjectDisplayID, getSidebarBtnID, getAddTaskBtnID, getTaskBoxID, getTaskNameID, getEditTaskBtnID, getDeleteTaskBtnID, getTaskDescriptionID, getTaskDeadlineID, getTaskPriorityID, getTaskDoneID, getAddSubtaskBtnID, getSubtaskDoneID, getSubtaskNameID, getDeleteSubtaskBtnID, getDeleteProjectBtnID } from "./ID";
+import { getTaskContainerID, getProjectDisplayID, getSidebarBtnID, getAddTaskBtnID, getTaskBoxID, getTaskNameID, getEditTaskBtnID, getDeleteTaskBtnID, getTaskDescriptionID, getTaskDeadlineID, getTaskPriorityID, getTaskDoneID, getAddSubtaskBtnID, getSubtaskDoneID, getSubtaskNameID, getDeleteSubtaskBtnID, getDeleteProjectBtnID, getSubtaskContainer } from "./ID";
 import { setCurrentProject, currentProject, remove, allProjects, numProjects } from "./index";
 import Task from "./task";
+import Subtask from "./subtask"
+
+/*
+Note there's a bug where it messes up if you name the project something w/ a number at the beginning (ie 5Project)
+*/
 
 let container = document.querySelector('#container');
 let sidebar = document.querySelector('#sidebar');
@@ -34,7 +39,7 @@ let createProjectDisplay = (project) => {
 
     //Create Event Listener for Add Task Button
     let addTaskBtn = document.querySelector(`#${getAddTaskBtnID(project)}`);
-    addTaskBtn.addEventListener('click', (e) => {
+    addTaskBtn.addEventListener('click', () => {
         let taskContainer = document.querySelector(`#${getTaskContainerID(project)}`);
 
         //Note we're not validating these inputs for now, we're assuming the user will type a valid input
@@ -49,60 +54,61 @@ let createProjectDisplay = (project) => {
 
         let taskBox = `
         <div class="task-box" id="${getTaskBoxID(project, newTask)}">
-                    <div class="task-content">
-
-                        <span class="task-title-and-delete-task-btn">
-                            <h2 class="task-header" id="${getTaskNameID(project, newTask)}">${newTask.getName()}: </h2>
-                            <button class="edit-task-btn" id="${getEditTaskBtnID(project, newTask)}">Edit Task</button>
-                            <button class="delete-task-btn" id="${getDeleteTaskBtnID(project, newTask)}">Delete
-                                Task</button>
-                        </span>
-
-                        <div>
-                            <h3 class="task-description-h3">Description:</h3>
-                            <p class="task-description" id="${getTaskDescriptionID(project, newTask)}">
-                                ${newTask.getDescription()}
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="task-deadline-h3">Deadline:</h3>
-                            <p class="task-deadline" id="${getTaskDeadlineID(project, newTask)}">${newTask.getDeadline()}</p>
-                        </div>
-
-                        <div>
-                            <h3 class="task-priority-h3">Priority:</h3>
-                            <p class="task-priority" id="${getTaskPriorityID(project, newTask)}">${newTask.getPriority()}</p>
-                        </div>
-
-                        <label for="${getTaskDoneID(project, newTask)}" class="task-done">Done?</label>
-                        <input type="checkbox" name="${getTaskDoneID(project, newTask)}" id="${getTaskDoneID(project, newTask)}">
-
-                        <div class="subtask-header-and-btn">
-                            <h3 class="subtask-header">Subtasks:</h3>
-                            <button class="add-subtask-btn" id="${getAddSubtaskBtnID(project, newTask)}">Add
-                                Subtask+</button>
-                        </div>
-
-                        <!-- Subtask Goes Here
-                        Format:
-                        
-                        <div class="subtask">
-                            <input type="checkbox" name="DefaultProject-task1-subtask1-done"
-                                id="DefaultProject-task1-subtask1-done">
-                            <label id="DefaultProject-task1-subtask1-name" for="DefaultProject-task1-subtask1-done">This
-                                is my 1st subtask</label>
-                        </div>
-                        -->
-
-                        <div class="delete-subtask-div">
-                            <button id="${getDeleteSubtaskBtnID(project, newTask)}" class="delete-subtask-btn">Delete
-                                All Checked Subtasks</button>
-                        </div>
-                    </div>
+            <div class="task-content">
+                <span class="task-title-and-delete-task-btn">
+                    <h2 class="task-header" id="${getTaskNameID(project, newTask)}">${newTask.getName()}: </h2>
+                    <button class="edit-task-btn" id="${getEditTaskBtnID(project, newTask)}">Edit Task</button>
+                    <button class="delete-task-btn" id="${getDeleteTaskBtnID(project, newTask)}">Delete Task</button>
+                </span>
+                <div>
+                    <h3 class="task-description-h3">Description:</h3>
+                    <p class="task-description" id="${getTaskDescriptionID(project, newTask)}">${newTask.getDescription()}</p>
                 </div>
+                <div>
+                    <h3 class="task-deadline-h3">Deadline:</h3>
+                    <p class="task-deadline" id="${getTaskDeadlineID(project, newTask)}">${newTask.getDeadline()}</p>
+                </div>
+                <div>
+                    <h3 class="task-priority-h3">Priority:</h3>
+                    <p class="task-priority" id="${getTaskPriorityID(project, newTask)}">${newTask.getPriority()}</p>
+                </div>
+                    <label for="${getTaskDoneID(project, newTask)}" class="task-done">Done?</label>
+                    <input type="checkbox" name="${getTaskDoneID(project, newTask)}" id="${getTaskDoneID(project, newTask)}">
+                <div class="subtask-header-and-btn" id="${getSubtaskContainer(project, newTask)}">
+                    <h3 class="subtask-header">Subtasks:</h3>
+                    <button class="add-subtask-btn" id="${getAddSubtaskBtnID(project, newTask)}">Add Subtask+</button>
+                </div>
+
+                        <!-- Subtask Goes Here -->
+
+                <div class="delete-subtask-div">
+                    <button id="${getDeleteSubtaskBtnID(project, newTask)}" class="delete-subtask-btn">Delete All Checked Subtasks</button>
+                </div>
+            </div>
+        </div>
         `
         taskContainer.insertAdjacentHTML('beforeend', taskBox);
+
+        //Add Subtask Event Listener
+        let addSubtaskBtn = document.querySelector(`#${getAddSubtaskBtnID(project, newTask)}`);
+        addSubtaskBtn.addEventListener('click', () => {
+
+            let name = prompt('Name: ');
+            let done = prompt('Done?: ');
+
+            let subtask = Subtask(name, done);
+            newTask.addSubtasks([subtask]);
+
+            let html = `
+                <div class="subtask">
+                    <input type="checkbox" name="${getSubtaskDoneID(project, newTask, subtask)}" id="${getSubtaskDoneID(project, newTask, subtask)}">
+                    <label id="${getSubtaskNameID(project, newTask, subtask)}" for="${getSubtaskDoneID(project, newTask, subtask)}">${subtask.getName()}</label>
+                </div>
+            `;
+            let subtaskContainer = document.querySelector(`#${getSubtaskContainer(project, newTask)}`);
+
+            subtaskContainer.insertAdjacentHTML('afterend', html);
+        });
     });
 
 
@@ -118,7 +124,7 @@ let createProjectDisplay = (project) => {
         setCurrentProject(null);
         display.remove();
 
-    })
+    });
 
 }
 
