@@ -89,6 +89,19 @@ let createProjectDisplay = (project) => {
         `
         taskContainer.insertAdjacentHTML('beforeend', taskBox);
 
+        // DELETE AFTER DONE
+        console.log(project.getTaskNames());
+
+        //Delete Task Event Listener
+        let deleteTaskBtn = document.querySelector(`#${getDeleteTaskBtnID(project, newTask)}`);
+        deleteTaskBtn.addEventListener('click', () => {
+            let taskBox = document.querySelector(`#${getTaskBoxID(project, newTask)}`);
+            taskBox.remove();
+            project.removeTasks([newTask]);
+            // DELETE AFTER DONE
+            console.log(project.getTaskNames());
+        });
+
         //Add Subtask Event Listener
         let addSubtaskBtn = document.querySelector(`#${getAddSubtaskBtnID(project, newTask)}`);
         addSubtaskBtn.addEventListener('click', () => {

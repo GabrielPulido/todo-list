@@ -17,6 +17,14 @@ let Project = (title) => {
         return tasks;
     }
 
+    let getTaskNames = () => {
+        let names = [];
+        for (let i = 0; i < tasks.length; i++) {
+            names.push(tasks[i].getName());
+        }
+        return names;
+    }
+
     let setTitle = (x) => {
         title = x;
     }
@@ -68,7 +76,7 @@ let Project = (title) => {
 
         //makes sure every element is a task
         for (let i = 0; i < arr.length; i++) {
-            if (isTask(arr[i]) === false) {
+            if (objectTest(Task(), arr[i]) === false) {
                 return `${arr[i]} is not a task object.  Please input a valid array of task objects`;
             }
         };
@@ -92,6 +100,7 @@ let Project = (title) => {
         setTasks,
         removeTasks,
         getNumTasks,
+        getTaskNames,
     }
 }
 
