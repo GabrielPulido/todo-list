@@ -1,20 +1,19 @@
 * {
     box-sizing: border-box;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 body {
     background-color: #3066BE;
+    /* margin: 0px; */
 }
 
 input[type="checkbox"], label {
     cursor: pointer;
 }
 
-button {
-background: none;
-    font-size: 1.5em;
-    cursor: pointer;
-}
+button {background: none;font-size: 1.5em;cursor: pointer;}
 
 #container {
     display: flex;
@@ -30,16 +29,18 @@ background: none;
     text-align: center;
 }
 
-#task-container {
+.task-container {
     display: grid;
-    background: rgb(59, 59, 59);
+    background: #2c303b;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     border-radius: 10px;
+    min-height: 500px;
+    min-width: 350px;
 }
 
 .task-box {
-    background: grey;
+    background: #404657;
     width: 350px;
     border-radius: 10px;
 }
@@ -49,7 +50,7 @@ background: none;
     font-size: 1.5em;
 }
 
-.projects {
+.project {
     display: block;
     margin-top: 10px;
 }
@@ -112,7 +113,7 @@ background: none;
 
 .delete-task-btn, .edit-task-btn {
     font-size: 1.1em;
-    max-height: 40px;
+    max-height: 50px;
 }
 
 .task-title-and-delete-task-btn {
@@ -120,7 +121,41 @@ background: none;
     justify-content: space-between;
 }
 
-#delete-project-div {
+.delete-project-div {
     text-align: center;
     margin-top: 10px;
 }
+
+#form-container {
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#generic-form {
+    display: none;
+    height: 500px;
+    width: 350px;
+    margin-left: -175px;
+    margin-top: -250px;
+    top: 50%;
+    left: 50%;
+    background: #404657;
+    border-radius: 10px;
+    position: fixed;
+    border: 2px solid white;
+}
+
+
+#add-project-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+

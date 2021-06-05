@@ -8,6 +8,11 @@ let Task = (name, description, deadline, priority, complete) => {
     let subtasks = [];
 
     //Getters
+
+    let getNumSubtasks = () => {
+        return subtasks.length;
+    }
+
     let getSubtasks = () => {
         return subtasks;
     }
@@ -109,34 +114,7 @@ let Task = (name, description, deadline, priority, complete) => {
 
     }
 
-    return { getName, getSubtasks, getDescription, getDeadline, getPriority, setName, getCompletionStatus, setDescription, setDeadline, setPriority, setCompletionStatus, addSubtasks, removeSubtasks }
-}
-
-//isTask function tested & works 
-let isTask = (x) => {
-    if ((typeof x) !== 'object') {
-        return 'Error, this is not an object';
-    }
-
-    let taskObj = Task();
-    let taskProperties = [];
-
-    for (const prop in taskObj) {
-        taskProperties.push(prop);
-    }
-
-    let objProperties = [];
-    for (const prop in x) {
-        objProperties.push(prop);
-    }
-
-    for (let i = 0; i < taskProperties.length; i++) {
-        if (taskProperties[i] !== objProperties[i]) {
-            return false;
-        }
-    }
-    return true;
+    return { getName, getSubtasks, getDescription, getDeadline, getPriority, setName, getCompletionStatus, setDescription, setDeadline, setPriority, setCompletionStatus, addSubtasks, removeSubtasks, getNumSubtasks, }
 }
 
 export default Task
-export { isTask }

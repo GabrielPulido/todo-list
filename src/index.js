@@ -1,34 +1,58 @@
 import Task from "./task";
 import Project from "./projects";
 import Subtask from "./subtask";
-import { objectSummary } from "./utilities";
 import { isTask } from "./task";
-import { removeArrayItem } from "./utilities";
+import { removeArrayItem, removeSpace, objectSummary } from "./utilities";
+import { promptWithCharLimit } from "./dom";
+import { createSidebarBtn, createProjectDisplay } from "./projectDOM"
+import { getSubtaskNameID } from "./ID";
 
 //All of your projects are stored in an array
 let allProjects = [];
 
-let defaultProject = Project();
+//removes a specific item from an array and returns a new array without that item
+let remove = (item) => {
+    let index = allProjects.indexOf(item);
+    if (index > -1) {
+        allProjects.splice(index, 1);
+    }
+}
 
-let testProj1 = Project('fdsdd');
-let testProj2 = Project('2asdf');
+//Returns the total # of projects
+let numProjects = () => {
+    return allProjects.length;
+}
 
+let setCurrentProject = (project) => {
+    currentProject = project;
+}
+
+//Create Default Project & add it to list of projects
+let defaultProject = Project('Default Project');
 allProjects.push(defaultProject);
-allProjects.push(testProj1);
-allProjects.push(testProj2);
 
-defaultProject.setTitle('Default Project');
+//This is the project we're currently looking at on the page
+let currentProject = defaultProject;
 
-let task1 = Task(`Default Task 1`, `This is the Description`, `5/15/21`, `Low`, false);
-let task2 = Task(`Start Backend`, `connect to database & find hosting`, `Finished`, `High`, true);
-let task3 = Task(`Finish Frontend`, `dom manipulation w/ react/js`, `tomorrow`, `Medium`, false);
-let task4 = Task(`Unit Testing`, `test some things`, `Done`, `Low`, true);
 
-defaultProject.setTasks([task1, task2, task3, task4]);
+createProjectDisplay(defaultProject);
+createSidebarBtn(defaultProject);
 
-let subtask1 = Subtask('Combine Object Creation Functions', true);
-let subtask2 = Subtask('Delete Line 32', false);
 
-task1.addSubtasks([subtask1, subtask2]);
+//DOM Stuff
+const container = document.querySelector('#container');
+const addProjectBtn = document.querySelector('#add-project-btn');
 
-allProjects = removeArrayItem(allProjects, defaultProject);
+addProjectBtn.addEventListener('click', () => {
+
+    let limit = 50
+    let name = promptWithCharLimit(`Project name (less than ${limit} characters) (can't be a number): `, limit);
+
+    let newProject = Project(name);
+    allProjects.push(newProject);
+
+    createProjectDisplay(newProject);
+    createSidebarBtn(newProject);
+});
+
+export { numProjects, allProjects, setCurrentProject, currentProject, remove }

@@ -10,24 +10,27 @@
 </head>
 
 <body>
+    <!-- Make sure that the entire "DefaultProject-display" div is commented out when you start the program because the JS will automatically generate this html. This is just so you can see the format. Also comment out the sidebar button for the same reason (the one w/ a class of 'projects'). -->
+
     <script type="module" src="main.js"></script>
+
     <div>
         <h1 class="project-title" id="project-title-header">Default Project</h1>
     </div>
+
     <div id="container">
         <div id="sidebar">
             <h1 id="sidebar-header">Projects: </h1>
             <button id="add-project-btn">+</button>
-            <button class="projects">Demo Lab 4</button>
-            <button class="projects">Study for Midterm</button>
-            <button class="projects">Finish Web Development Course</button>
-            <button class="projects">Start Learning Networking</button>
+            <!-- <button class="projects" id="DefaultProject-sidebar-btn">Default Project</button> -->
         </div>
-        <div id="task-stuff">
+
+        <!-- <div id="DefaultProject-display">
             <div class="add-task-div">
                 <button id="DefaultProject-add-task-btn">Add Task +</button>
             </div>
-            <div id="task-container">
+
+            <div class="task-container" id="DefaultProject-task-container">
 
                 <div class="task-box" id="DefaultProject-task1">
                     <div class="task-content">
@@ -73,28 +76,19 @@
                                 is my 1st subtask</label>
                         </div>
 
-                        <div class="subtask">
-                            <input type="checkbox" name="DefaultProject-task1-subtask2-done"
-                                id="DefaultProject-task1-subtask2-done">
-                            <label id="DefaultProject-task1-subtask2-name" for="DefaultProject-task1-subtask2-done">This
-                                is my 2nd subtask</label>
-                        </div>
-
                         <div class="delete-subtask-div">
                             <button id="DefaultProject-task1-delete-subtask-btn" class="delete-subtask-btn">Delete
-                                Subtask</button>
+                                All Checked Subtasks</button>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-            <div id="delete-project-div">
+            <div class="delete-project-div">
                 <button id="DefaultProject-delete-project-btn">Delete Project</button>
             </div>
-        </div>
-
-
+        </div> -->
 
     </div>
 </body>

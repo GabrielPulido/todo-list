@@ -39,4 +39,57 @@ let removeArrayItem = (array, item) => {
     return array;
 }
 
-export { objectSummary, removeSpace, removeArrayItem };
+//Takes 2 parameters, the type of object we're checking for, and the one we want to test.
+// ex) objectTest(Project(), defaultProject);
+//  - this would check if defaultProject is a Project() object.
+//Return true if the inputted object is of the same type as the desiredObject and false if it isn't
+let objectTest = (desiredObject, obj) => {
+    //checks if it's even an object
+    if ((typeof obj) !== 'object') {
+        return false;
+    }
+
+    //Put all of desiredObject's properties into an array
+    let desiredObjProperties = [];
+    for (const prop in desiredObject) {
+        desiredObjProperties.push(prop);
+    }
+
+    //put all of the test object's properties in an array
+    let objProperties = []
+    for (const prop in obj) {
+        objProperties.push(prop);
+    }
+
+    //loop through the desiredObject's properties and make sure the test object has all those properties
+    for (let i = 0; i < desiredObjProperties.length; i++) {
+        if (desiredObjProperties[i] !== objProperties[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+let projectTaskSubtaskTests = (project, task, subtask) => {
+    //Store the results of all tests in one array so if one fails, we know which one
+    let allResults = [];
+
+    let projectTestResult = objectTest(Project(), project);
+    allResults.push(projectTestResult);
+
+    let taskTestResult = objectTest(Task(), task);
+    allResults.push(taskTestResult);
+
+    let subtaskTestResult = objectTest(Subtask(), subtask);
+    allResults.push(subtaskTestResult);
+
+    for (let i = 0; i < allResults.length; i++) {
+        if (allResults[i] === false) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+export { objectSummary, removeSpace, removeArrayItem, objectTest, projectTaskSubtaskTests };

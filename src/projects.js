@@ -1,9 +1,13 @@
-import { isTask } from "./task";
-import { } from "./utilities";
+import { objectTest } from "./utilities";
+import Task from "./task";
 
 let Project = (title) => {
 
     let tasks = [];
+
+    let getNumTasks = () => {
+        return tasks.length;
+    }
 
     let getTitle = () => {
         return title;
@@ -22,20 +26,23 @@ let Project = (title) => {
 
         //makes sure user passes an array
         if (Array.isArray(arr) === false) {
-            return 'Error: Input is not an array. Please input a valid array of task objects';
+            console.log('Error: Input is not an array. Please input a valid array of task objects');
+            return;
         }
 
         //makes sure every element of the array is an object
         for (let i = 0; i < arr.length; i++) {
             if ((typeof arr[i]) !== 'object') {
-                return `${arr[i]} is not an object. Please input a valid array of task objects`;
+                console.log(`${arr[i]} is not an object. Please input a valid array of task objects`);
+                return;
             }
         };
 
         //makes sure every element is a task
         for (let i = 0; i < arr.length; i++) {
-            if (isTask(arr[i]) === false) {
-                return `${arr[i]} is not a task object.  Please input a valid array of task objects`;
+            if (objectTest(Task(), arr[i]) === false) {
+                console.log(`${arr[i]} is not a task object.  Please input a valid array of task objects`);
+                return;
             }
         };
 
@@ -84,6 +91,7 @@ let Project = (title) => {
         setTitle,
         setTasks,
         removeTasks,
+        getNumTasks,
     }
 }
 
