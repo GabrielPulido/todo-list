@@ -1,6 +1,6 @@
 import { removeSpace } from "./utilities";
 import Project from "./projects";
-import { getTaskContainerID, getProjectDisplayID, getSidebarBtnID, getAddTaskBtnID, getTaskBoxID, getTaskNameID, getEditTaskBtnID, getDeleteTaskBtnID, getTaskDescriptionID, getTaskDeadlineID, getTaskPriorityID, getTaskDoneID, getAddSubtaskBtnID, getSubtaskDoneID, getSubtaskNameID, getDeleteSubtaskBtnID, getDeleteProjectBtnID, getSubtaskContainer } from "./ID";
+import { getTaskContainerID, getProjectDisplayID, getSidebarBtnID, getAddTaskBtnID, getTaskBoxID, getTaskNameID, getEditTaskBtnID, getDeleteTaskBtnID, getTaskDescriptionID, getTaskDeadlineID, getTaskPriorityID, getTaskDoneID, getAddSubtaskBtnID, getSubtaskDoneID, getSubtaskNameID, getDeleteSubtaskBtnID, getDeleteProjectBtnID, getSubtaskContainer, getSubtaskID } from "./ID";
 import { setCurrentProject, currentProject, remove, allProjects, numProjects } from "./index";
 import Task from "./task";
 import Subtask from "./subtask"
@@ -89,17 +89,12 @@ let createProjectDisplay = (project) => {
         `
         taskContainer.insertAdjacentHTML('beforeend', taskBox);
 
-        // DELETE AFTER DONE
-        console.log(project.getTaskNames());
-
         //Delete Task Event Listener
         let deleteTaskBtn = document.querySelector(`#${getDeleteTaskBtnID(project, newTask)}`);
         deleteTaskBtn.addEventListener('click', () => {
             let taskBox = document.querySelector(`#${getTaskBoxID(project, newTask)}`);
             taskBox.remove();
             project.removeTasks([newTask]);
-            // DELETE AFTER DONE
-            console.log(project.getTaskNames());
         });
 
         //Add Subtask Event Listener
@@ -113,7 +108,7 @@ let createProjectDisplay = (project) => {
             newTask.addSubtasks([subtask]);
 
             let html = `
-                <div class="subtask">
+                <div class="subtask" id="${getSubtaskID(project, newTask, subtask)}">
                     <input type="checkbox" name="${getSubtaskDoneID(project, newTask, subtask)}" id="${getSubtaskDoneID(project, newTask, subtask)}">
                     <label id="${getSubtaskNameID(project, newTask, subtask)}" for="${getSubtaskDoneID(project, newTask, subtask)}">${subtask.getName()}</label>
                 </div>
@@ -122,6 +117,26 @@ let createProjectDisplay = (project) => {
 
             subtaskContainer.insertAdjacentHTML('afterend', html);
         });
+
+        //Delete Subtask Listener
+        let deleteSubtask = document.querySelector(`#${getDeleteSubtaskBtnID(project, newTask)}`);
+        deleteSubtask.addEventListener('click', () => {
+            let subtaskList = newTask.getSubtasks();
+
+            let erase = [];
+
+            for (let i = 0; i < subtaskList.length; i++) {
+                let checkboxID = getSubtaskDoneID(project, newTask, subtaskList[i]);
+                let checkbox = document.querySelector(`#${checkboxID}`);
+                if (checkbox.checked === true) {
+                    erase.push(subtaskList[i]);
+                    let subtaskDisplay = document.querySelector(`#${getSubtaskID(project, newTask, subtaskList[i])}`);
+                    subtaskDisplay.remove();
+                }
+            }
+            newTask.removeSubtasks(erase);
+        });
+
     });
 
 
@@ -138,6 +153,7 @@ let createProjectDisplay = (project) => {
         display.remove();
 
     });
+
 
 }
 

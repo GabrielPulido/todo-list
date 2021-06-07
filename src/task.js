@@ -17,6 +17,17 @@ let Task = (name, description, deadline, priority, complete) => {
         return subtasks;
     }
 
+    /*
+        let removeSubtasks = (arr) => {
+            for (let j = 0; j < arr.length; j++) {
+                let index = subtasks.indexOf(arr[j]);
+                if (index > -1) {
+                    subtasks.splice(index, 1);
+                }
+            }
+        }
+    */
+
     let getName = () => {
         return name;
     }
@@ -114,7 +125,7 @@ let Task = (name, description, deadline, priority, complete) => {
 
     }
 
-    return { getName, getSubtasks, getDescription, getDeadline, getPriority, setName, getCompletionStatus, setDescription, setDeadline, setPriority, setCompletionStatus, addSubtasks, removeSubtasks, getNumSubtasks, }
+    return { getName, getSubtasks, getDescription, getDeadline, getPriority, setName, getCompletionStatus, setDescription, setDeadline, setPriority, setCompletionStatus, addSubtasks, removeSubtasks, getNumSubtasks }
 }
 
 export default Task
