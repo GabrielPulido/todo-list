@@ -78,6 +78,13 @@ let getGenericID = (project, ...args) => {
     return id;
 }
 
+let getProjectNameID = (project) => {
+    let genericID = getGenericID(project);
+
+    let id = `${genericID}-name`;
+    return id;
+}
+
 let getTaskContainerID = (project) => {
     let genericID = getGenericID(project);
 
@@ -98,7 +105,6 @@ let getSidebarBtnID = (project) => {
     let id = `${genericID}-sidebar-btn`;
     return id;
 }
-
 
 let getAddTaskBtnID = (project) => {
     let genericID = getGenericID(project);
@@ -208,4 +214,4 @@ let getSubtaskID = (project, task, subtask) => {
     return id;
 }
 
-export { getTaskContainerID, getProjectDisplayID, getSidebarBtnID, getAddTaskBtnID, getTaskBoxID, getTaskNameID, getEditTaskBtnID, getDeleteTaskBtnID, getTaskDescriptionID, getTaskDeadlineID, getTaskPriorityID, getTaskDoneID, getAddSubtaskBtnID, getSubtaskDoneID, getSubtaskNameID, getDeleteSubtaskBtnID, getDeleteProjectBtnID, getSubtaskContainer, getSubtaskID }
+export { getTaskContainerID, getProjectDisplayID, getSidebarBtnID, getAddTaskBtnID, getTaskBoxID, getTaskNameID, getEditTaskBtnID, getDeleteTaskBtnID, getTaskDescriptionID, getTaskDeadlineID, getTaskPriorityID, getTaskDoneID, getAddSubtaskBtnID, getSubtaskDoneID, getSubtaskNameID, getDeleteSubtaskBtnID, getDeleteProjectBtnID, getSubtaskContainer, getSubtaskID, getProjectNameID }

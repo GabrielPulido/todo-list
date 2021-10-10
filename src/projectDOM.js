@@ -4,6 +4,7 @@ import { getTaskContainerID, getProjectDisplayID, getSidebarBtnID, getAddTaskBtn
 import { setCurrentProject, currentProject, remove, allProjects, numProjects } from "./index";
 import Task from "./task";
 import Subtask from "./subtask"
+import { storeTask } from "./localStorage";
 
 /*
 Note there's a bug where it messes up if you name the project something w/ a number at the beginning (ie 5Project)

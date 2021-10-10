@@ -1,11 +1,6 @@
-import Task from "./task";
 import Project from "./projects";
-import Subtask from "./subtask";
-import { isTask } from "./task";
-import { removeArrayItem, removeSpace, objectSummary } from "./utilities";
 import { promptWithCharLimit } from "./dom";
-import { createSidebarBtn, createProjectDisplay } from "./projectDOM"
-import { getSubtaskNameID } from "./ID";
+import { createSidebarBtn, createProjectDisplay } from "./projectDOM";
 
 //All of your projects are stored in an array
 let allProjects = [];
@@ -25,6 +20,11 @@ let numProjects = () => {
 
 let setCurrentProject = (project) => {
     currentProject = project;
+}
+
+//Open all projects in local storage
+let openProjects = () => {
+
 }
 
 //Create Default Project & add it to list of projects
