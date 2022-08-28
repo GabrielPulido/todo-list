@@ -1,4 +1,4 @@
-# todo-list
+# To-Do List
 
 This is a todo-list app I built using html, css, and javascript. This was to practice the basic front-end concepts I learned so far. 
 
